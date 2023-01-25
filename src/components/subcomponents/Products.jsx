@@ -1,20 +1,40 @@
 import { useNavigate } from "react-router-dom";
-import { datas } from "../../util/data";
+// import { datas } from "../../util/data";
 import "../../style/substyle/products.css";
 import Add from "../subcomponents/Add";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export default function Orders() {
   const navigate = useNavigate("");
+  const [data, setData] = useState([{}]);
 
-  const items = datas.slice(0, 6).map((item, i) => {
+  useEffect(() => {
+    const fetchItems = async () => {
+      const response = await axios.get("http://localhost:2500/products");
+      setData(response.data);
+    };
+    fetchItems();
+  }, []);
+
+  // return (
+  //   <div>
+  //     {data.map((item, i) => (
+  //       <div key={i}>{item.name}</div>
+  //     ))}
+  //   </div>
+  // );
+
+  const items = data.slice(0, 6).map((item, i) => {
     return (
       <tr key={i}>
         <th>
           <img src={item.image} alt="" width={50} height={50} />
         </th>
         <th>{item.name}</th>
-        <th>{item.price}</th>
+        <th>${item.price}</th>
         <th>{item.stock}</th>
-        <th>{item.sale}</th>
+        <th>{item.sale} % </th>
         <th>{item.category}</th>
       </tr>
     );

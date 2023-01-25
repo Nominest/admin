@@ -4,5 +4,5 @@ import { datas } from "../../util/data";
 export default function Orders() {
   // const navigate = useNavigate("");
 
-  return <div></div>;
+  return <div>Orders</div>;
 }
