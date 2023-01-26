@@ -10,7 +10,7 @@ export const MENUS = [
   { name: "Бүтээгдэхүүнүүд", url: "/products" },
   { name: "Захиалгууд", url: "/reservations" },
   { name: "Хэрэглэгчид", url: "/users" },
-  { name: "Модератор", url: "/moderator" },
+  { name: "Модератор", url: "/moderators" },
   { name: "Тохиргоо", url: "/settings" },
 ];
 

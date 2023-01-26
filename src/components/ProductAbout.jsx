@@ -7,7 +7,7 @@ import Orders from "./subcomponents/Orders";
 import Users from "./subcomponents/Users";
 import Moderator from "./subcomponents/Moderator";
 import Settings from "./subcomponents/Settings";
-import Add from "./subcomponents/Add";
+import SlideMenu from "./SideMenu";
 
 export default function ProductAbout() {
   return (
@@ -19,7 +19,7 @@ export default function ProductAbout() {
         <Route path={MENUS[3].url} element={<Users />}></Route>
         <Route path={MENUS[4].url} element={<Moderator />}></Route>
         <Route path={MENUS[5].url} element={<Settings />}></Route>
-        <Route path={`/add`} element={<Add />}></Route>
+        {/* <Route path={`/add`} element={<Add />}></Route> */}
       </Routes>
     </div>
   );

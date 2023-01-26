@@ -1,7 +1,5 @@
 .sidemenu {
-  background-color: cornflowerblue;
   width: 30%;
-
 }
 .sidemenu button {
   display: flex;
@@ -11,4 +9,9 @@
   border: none;
   padding: 10px;
   margin-left: 20px;
+  background-color: white;
+}
+.sidemenu button:hover {
+  background-color: #003585;
+  color: white;
 }
