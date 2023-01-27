@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import React from "react";
-import "../../style/substyle/orders.css";
+import "../../style/pages/orders.css";
 
 export default function Orders() {
   const [data, setData] = useState([{}]);
@@ -23,6 +23,7 @@ export default function Orders() {
           <td>{item.id}</td>
           <td>{item.date}</td>
           <td>{item.phone}</td>
+          <td>{item.email}</td>
           <td>{item.address}</td>
           <td>{item.cnt} </td>
           <td>{item.amount}</td>
@@ -32,7 +33,7 @@ export default function Orders() {
       );
     });
   return (
-    <div>
+    <div className="table-head">
       <table>
         <thead>
           <tr>

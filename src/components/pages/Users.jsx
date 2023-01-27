@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "../../style/substyle/products.css";
+import "../../style/pages/products.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -8,7 +8,7 @@ export default function Users() {
   const navigate = useNavigate();
   useEffect(() => {
     const fetchItems = async () => {
-      const response = await axios.get("http://localhost:2500/moderators");
+      const response = await axios.get("http://localhost:2500/users");
       setData(response.data);
     };
     fetchItems();
@@ -19,7 +19,6 @@ export default function Users() {
   const items = data.slice(0, 6).map((item, i) => {
     return (
       <tr key={i}>
-        <td>{i + 1}</td>
         <td>{item.id}</td>
         <td>{item.lastname}</td>
         <td>{item.name}</td>
@@ -44,6 +43,7 @@ export default function Users() {
             <th>Phone</th>
             <th>Date</th>
             <th>Count</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>{items}</tbody>

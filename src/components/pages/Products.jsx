@@ -1,12 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import "../../style/substyle/products.css";
+import "../../style/pages/products.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Add from "../subcomponents/Add";
 
 export default function Orders() {
   // const navigate = useNavigate("");
   const [data, setData] = useState([{}]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchItems = async () => {
       const response = await axios.get("http://localhost:2500/products");
@@ -23,19 +25,21 @@ export default function Orders() {
         <th>
           <img src={item.image} alt="" width={50} height={50} />
         </th>
-        <td>{i + 1}</td>
         <td>{item.name}</td>
         <td>${item.price}</td>
         <td>{item.stock}</td>
         <td>{item.sale} % </td>
         <td>{item.category}</td>
-        <th onClick={() => editProduct(i)}>Edit</th>
-        <th>Delete</th>
+        <td onClick={() => editProduct(i)}></td>
       </tr>
     );
   });
   return (
-    <div>
+    <div className="products">
+      <div className="add-button">
+        <Add />
+      </div>
+      <div></div>
       <table>
         <thead>
           <tr>

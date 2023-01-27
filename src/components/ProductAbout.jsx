@@ -1,12 +1,12 @@
-import Monitoring from "./subcomponents/Monitoring";
+import Monitoring from "./pages/Monitoring";
 import "../style/productabout.css";
 import { Route, Routes } from "react-router-dom";
 import { MENUS } from "../util/data";
-import Products from "./subcomponents/Products";
-import Orders from "./subcomponents/Orders";
-import Users from "./subcomponents/Users";
-import Moderator from "./subcomponents/Moderator";
-import Settings from "./subcomponents/Settings";
+import Products from "./pages/Products";
+import Orders from "./pages/Orders";
+import Users from "./pages/Users";
+import Moderator from "./pages/Moderator";
+import Settings from "./pages/Settings";
 import SlideMenu from "./SideMenu";
 
 export default function ProductAbout() {

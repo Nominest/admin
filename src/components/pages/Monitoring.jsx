@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "../../style/substyle/monitoring.css";
+import "../../style/pages/monitoring.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 export default function Monitoring() {
@@ -17,13 +17,14 @@ export default function Monitoring() {
     <div className="monitor">
       {data.slice(0, 6).map((item, i) => (
         <div
+          className="monitor-product"
           key={i}
           onClick={() => {
             navigate(`/monitoring`);
           }}
         >
-          <img src={item.image} alt="" width={200} height={200} />
-          <p className="price">${item.price}</p>
+          <img src={item.image} alt="" width={250} height={200} />
+          <p className="price">{item.name}</p>
         </div>
       ))}
     </div>
