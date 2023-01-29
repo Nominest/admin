@@ -10,12 +10,5 @@ export default function Filter() {
     };
     fetchItems();
   }, []);
-
-  const items = data.map((item, i) => {
-    return (
-      <tr key={i}>
-        <td>{item.category}</td>
-      </tr>
-    );
-  });
+  return <div className="filter">Filter</div>;
 }
