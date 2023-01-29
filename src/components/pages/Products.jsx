@@ -3,9 +3,9 @@ import "../../style/pages/products.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Add from "../subcomponents/Add";
+import Filter from "../subcomponents/Filter";
 
 export default function Orders() {
-  // const navigate = useNavigate("");
   const [data, setData] = useState([{}]);
   const navigate = useNavigate();
 
@@ -16,10 +16,8 @@ export default function Orders() {
     };
     fetchItems();
   }, []);
-  function editProduct(id) {
-    navigate(`/edit` + (id + 1));
-  }
-  const items = data.slice(0, 6).map((item, i) => {
+
+  const items = data.map((item, i) => {
     return (
       <tr key={i}>
         <th>
@@ -30,7 +28,9 @@ export default function Orders() {
         <td>{item.stock}</td>
         <td>{item.sale} % </td>
         <td>{item.category}</td>
-        <td onClick={() => editProduct(i)}></td>
+        <td>
+          <img src="./download.png" alt="" width={50} height={30} />
+        </td>
       </tr>
     );
   });
@@ -38,6 +38,7 @@ export default function Orders() {
     <div className="products">
       <div className="add-button">
         <Add />
+        <Filter />
       </div>
       <div></div>
       <table>

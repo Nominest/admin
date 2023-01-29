@@ -1,3 +1,7 @@
 .products {
   text-align: center;
 }
+.add-button {
+  display: flex;
+  justify-content: space-between;
+}
