@@ -15,7 +15,7 @@ export default function ProductAbout() {
       <Routes>
         <Route path={MENUS[0].url} element={<Monitoring />}></Route>
         <Route path={MENUS[1].url} element={<Products />}></Route>
-        <Route path={MENUS[2].url} element={<Orders />}></Route>
+        {/* <Route path={MENUS[2].url} element={<Orders />}></Route> */}
         <Route path={MENUS[3].url} element={<Users />}></Route>
         <Route path={MENUS[4].url} element={<Moderator />}></Route>
         <Route path={MENUS[5].url} element={<Settings />}></Route>

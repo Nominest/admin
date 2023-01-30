@@ -1,71 +1,103 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import "../../style/sub/add.css";
+import axios from "axios";
 
-export default function Add() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+export default function Add(prop) {
+  const [modalShow, setModalShow] = useState(false);
+  const [data, setData] = useState([{}]);
+  const { setShow, selectedItem, setSelectedItem } = prop;
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const response = await axios.get("http://localhost:2500/products");
+      setData(response.data);
+    };
+    fetchItems();
+  }, []);
+
+  const inputValue = (e) => {
+    e.preventDefault();
+    const newProduct = {
+      price: e.target.price.value,
+      name: e.target.name.value,
+      description: e.target.description.value,
+    };
+    console.log(newProduct);
+  };
 
   return (
     <div className="addModal">
-      <Button variant="primary" onClick={handleShow}>
-        + Add data
-      </Button>
-
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={handleShow} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add new product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={inputValue}>
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
-              <Form.Control type="email" placeholder="Insert Image URL" />
+              <Form.Control
+                type="text"
+                placeholder="Insert Image URL"
+                name="image"
+              />
             </Form.Group>
-
             <Form.Group className="mb-3">
               <Form.Label>Name</Form.Label>
-              <Form.Control type="email" placeholder="Procuct Name" />
+              <Form.Control
+                type="text"
+                name="name"
+                defaultValue={selectedItem.name}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Price</Form.Label>
-              <Form.Control type="email" placeholder="Insert Price" />
+              <Form.Control
+                type="number"
+                name="price"
+                defaultValue={selectedItem.price}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                name="description"
+                defaultValue={selectedItem.description}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Stock</Form.Label>
-              <Form.Control type="email" placeholder="Insert Stock" />
+              <Form.Control type="text" defaultValue={selectedItem.stock} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Sale</Form.Label>
-              <Form.Control type="email" placeholder="Insert Sale Percentage" />
+              <Form.Control type="text" defaultValue={selectedItem.sale} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Category</Form.Label>
-              <Form.Select>
-                <option>Appliance</option>
-                <option>Computer</option>
-              </Form.Select>
+              <Form.Control type="text" defaultValue={selectedItem.category} />
+              {/* <Form.Select>
+                {data.map((type, i) => (
+                  <option key={i} value={type.value}>
+                    {type.category}
+                  </option>
+                ))}
+              </Form.Select> */}
             </Form.Group>
-            {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group> */}
             <Button variant="primary" type="submit">
               Submit
             </Button>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+        <Modal.Footer></Modal.Footer>
       </Modal>
     </div>
   );

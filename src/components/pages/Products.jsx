@@ -3,11 +3,14 @@ import "../../style/pages/products.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Add from "../subcomponents/Add";
-import Filter from "../subcomponents/Filter";
+import Product from "./Product";
 
 export default function Orders() {
+  const [show, setShow] = useState(false);
   const [data, setData] = useState([{}]);
   const navigate = useNavigate();
+  const handleShow = () => setShow(true);
+  const [selectedItem, setSelectedItem] = useState();
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -17,30 +20,20 @@ export default function Orders() {
     fetchItems();
   }, []);
 
-  const items = data.map((item, i) => {
-    return (
-      <tr key={i}>
-        <th>
-          <img src={item.image} alt="" width={50} height={50} />
-        </th>
-        <td>{item.name}</td>
-        <td>${item.price}</td>
-        <td>{item.stock}</td>
-        <td>{item.sale} % </td>
-        <td>{item.category}</td>
-        <td>
-          <img src="./download.png" alt="" width={50} height={30} />
-        </td>
-      </tr>
-    );
-  });
   return (
     <div className="products">
       <div className="add-button">
-        <Add />
-        <Filter />
+        {show ? <Add setShow={setShow} selectedItem={selectedItem} /> : ""}
+        <button
+          variant="primary"
+          onClick={() => {
+            setShow(true);
+            setSelectedItem("");
+          }}
+        >
+          + Add data
+        </button>
       </div>
-      <div></div>
       <table>
         <thead>
           <tr>
@@ -53,53 +46,19 @@ export default function Orders() {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>{items}</tbody>
+        <tbody>
+          {data.map((item, i) => {
+            return (
+              <Product
+                key={i}
+                item={item}
+                setShow={setShow}
+                setSelectedItem={setSelectedItem}
+              />
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
 }
-// return (
-//     <div>
-//       <div>
-//         <button>+ Бараа нэмэх</button>
-//       </div>
-//       <div className="products-head">
-//         <p className="image">Зураг</p>
-//         <p className="name">Барааны нэр</p>
-//         <p className="price">Үнэ</p>
-//         <p className="stock">Үлдэгдэл</p>
-//         <p className="sale">Хямдрал</p>
-//         <p className="category">Категори</p>
-//       </div>
-//       {datas.slice(0, 10).map((data, i) => (
-//         <div
-//           className="products"
-//           key={i}
-//           onClick={() => {
-//             navigate(`/products`);
-//           }}
-//         >
-//           <img
-//             src={data.image}
-//             alt="productsImage"
-//             width={50}
-//             height={50}
-//             className="image"
-//           />
-//           <p className="name">{data.name}</p>
-//           <p className="price">{data.price}</p>
-//           <p className="stock">{data.stock}</p>
-//           <p className="sale">{data.sale}</p>
-//           <p className="category">{data.category}</p>
-//         </div>
-//       ))}
-//     </div>
-//   );
-
-// return (
-//   <div>
-//     {data.map((item, i) => (
-//       <div key={i}>{item.name}</div>
-//     ))}
-//   </div>
-// );
