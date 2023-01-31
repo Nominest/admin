@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-export default function Delete() {
+export default function Delete(prop) {
+  const [deleteShow, setDeleteShow] = useState(false);
+
   return (
     <div
       className="modal show"

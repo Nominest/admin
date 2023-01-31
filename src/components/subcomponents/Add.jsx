@@ -8,9 +8,12 @@ import axios from "axios";
 export default function Add(prop) {
   const [modalShow, setModalShow] = useState(false);
   const [data, setData] = useState([{}]);
-  const { setShow, selectedItem, setSelectedItem } = prop;
+  const { setShow, selectedItem, setSelectedItem, item } = prop;
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [name, setName] = useState("");
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -20,7 +23,7 @@ export default function Add(prop) {
     fetchItems();
   }, []);
 
-  const inputValue = (e) => {
+  const addHandler = (e) => {
     e.preventDefault();
     const newProduct = {
       price: e.target.price.value,
@@ -28,6 +31,10 @@ export default function Add(prop) {
       description: e.target.description.value,
     };
     console.log(newProduct);
+    axios
+      .post("http://localhost:2500/add", newProduct)
+      .then((res) => setData(res.data))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -37,7 +44,7 @@ export default function Add(prop) {
           <Modal.Title>Add new product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={inputValue}>
+          <Form onSubmit={addHandler}>
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
               <Form.Control
