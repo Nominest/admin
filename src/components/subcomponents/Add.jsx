@@ -6,14 +6,14 @@ import "../../style/sub/add.css";
 import axios from "axios";
 
 export default function Add(prop) {
-  const [modalShow, setModalShow] = useState(false);
+  // const [modalShow, setModalShow] = useState(false);
   const [data, setData] = useState([{}]);
   const { setShow, selectedItem, setSelectedItem, item } = prop;
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [name, setName] = useState("");
+  // const [description, setDescription] = useState("");
+  // const [price, setPrice] = useState("");
+  // const [name, setName] = useState("");
 
   useEffect(() => {
     const fetchItems = async () => {

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Delete from "../subcomponents/Delete";
 
 export default function Product(prop) {
@@ -7,14 +6,11 @@ export default function Product(prop) {
   const [data, setData] = useState([{}]);
   const [deleteShow, setDeleteShow] = useState(false);
 
-  //   const [show, setShow] = useState(false);
   const handleShow = () => {
     setSelectedItem(item);
     setShow(true);
   };
-  // function deleteHandler(id) {
-  //   axios.delete(`http://localhost:2500/products/${id}`);
-  // }
+
   const handleDelete = () => {
     setDeleteShow(true);
   };
@@ -29,10 +25,7 @@ export default function Product(prop) {
       <td>{item.sale} % </td>
       <td>{item.category}</td>
       <td>
-        <button onClick={handleShow}>
-          {/* <img src="./download.png" alt="" width={50} height={30} /> */}
-          Edit
-        </button>
+        <button onClick={handleShow}>Edit</button>
         <button onClick={handleDelete}>
           {deleteShow ? <Delete setDeleteShow={setDeleteShow} /> : ""}
           Delete
