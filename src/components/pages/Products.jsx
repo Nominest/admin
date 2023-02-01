@@ -54,6 +54,7 @@ export default function Orders() {
                 item={item}
                 setShow={setShow}
                 setSelectedItem={setSelectedItem}
+                selectedItem={selectedItem}
               />
             );
           })}

@@ -32,7 +32,7 @@ export default function Add(prop) {
     };
     console.log(newProduct);
     axios
-      .post("http://localhost:2500/add", newProduct)
+      .post("http://localhost:2500/product/add", newProduct)
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   };

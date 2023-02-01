@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Delete from "../subcomponents/Delete";
 
 export default function Product(prop) {
-  const { item, setShow, setSelectedItem } = prop;
+  const { item, setShow, setSelectedItem, selectedItem } = prop;
   const [data, setData] = useState([{}]);
   const [deleteShow, setDeleteShow] = useState(false);
 
@@ -13,7 +13,9 @@ export default function Product(prop) {
 
   const handleDelete = () => {
     setDeleteShow(true);
+    setSelectedItem(item);
   };
+
   return (
     <tr>
       <th>
@@ -27,7 +29,11 @@ export default function Product(prop) {
       <td>
         <button onClick={handleShow}>Edit</button>
         <button onClick={handleDelete}>
-          {deleteShow ? <Delete setDeleteShow={setDeleteShow} /> : ""}
+          {deleteShow ? (
+            <Delete setDeleteShow={setDeleteShow} selectedItem={selectedItem} />
+          ) : (
+            ""
+          )}
           Delete
         </button>
       </td>
