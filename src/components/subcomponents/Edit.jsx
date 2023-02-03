@@ -6,7 +6,7 @@ import "../../style/sub/add.css";
 import axios from "axios";
 import { v4 as uuid } from "uuid";
 
-export default function Add(prop) {
+export default function Edit(prop) {
   const [data, setData] = useState([{}]);
   const { setShow, selectedItem, setSelectedItem, item } = prop;
   const handleShow = () => setShow(true);
@@ -48,7 +48,7 @@ export default function Add(prop) {
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="image"
+                type="text"
                 placeholder="Insert Image URL"
                 name="image"
               />
@@ -109,5 +109,3 @@ export default function Add(prop) {
     </div>
   );
 }
-
-//https://codesandbox.io/s/q23iz save

@@ -32,7 +32,7 @@ export default function Delete(prop) {
           <input
             type="button"
             variant="secondary"
-            onClick={() => handleClose(true)}
+            onClick={handleClose}
             value=" Close"
           />
         </Modal.Body>
