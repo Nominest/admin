@@ -8,7 +8,7 @@ import { v4 as uuid } from "uuid";
 
 export default function Add(prop) {
   const [data, setData] = useState([{}]);
-  const { setShow, selectedItem, setSelectedItem, item } = prop;
+  const { setShow, selectedItem } = prop;
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
   const unique_id = uuid();
@@ -48,7 +48,7 @@ export default function Add(prop) {
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="image"
+                type="text"
                 placeholder="Insert Image URL"
                 name="image"
               />
@@ -67,6 +67,14 @@ export default function Add(prop) {
                 type="number"
                 name="price"
                 defaultValue={selectedItem.price}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Spec</Form.Label>
+              <Form.Control
+                type="text"
+                name="description"
+                defaultValue={selectedItem.spec}
               />
             </Form.Group>
             <Form.Group className="mb-3">

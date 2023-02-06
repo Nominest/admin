@@ -11,6 +11,7 @@ export default function Orders() {
   const navigate = useNavigate();
   const handleShow = () => setShow(true);
   const [selectedItem, setSelectedItem] = useState();
+  const [deleteShow, setDeleteShow] = useState(false);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -23,7 +24,7 @@ export default function Orders() {
   return (
     <div className="products">
       <div className="add-button">
-        {show ? <Add setShow={setShow} selectedItem={selectedItem} /> : ""}
+        {show && <Add setShow={setShow} selectedItem={selectedItem} />}
         <button
           variant="primary"
           onClick={() => {
@@ -55,6 +56,7 @@ export default function Orders() {
                 setShow={setShow}
                 setSelectedItem={setSelectedItem}
                 selectedItem={selectedItem}
+                // setDeleteShow={setDeleteShow}
               />
             );
           })}

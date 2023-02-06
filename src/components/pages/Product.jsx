@@ -26,13 +26,13 @@ export default function Product(prop) {
       <td>{item.stock}</td>
       <td>{item.sale} % </td>
       <td>{item.category}</td>
+      {/* <td>{item.spec}</td> */}
+
       <td>
         <button onClick={handleShow}>Edit</button>
         <button onClick={handleDelete}>
-          {deleteShow ? (
+          {deleteShow && (
             <Delete setDeleteShow={setDeleteShow} selectedItem={selectedItem} />
-          ) : (
-            ""
           )}
           Delete
         </button>
