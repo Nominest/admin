@@ -1,25 +1,27 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "../../style/pages/products.css";
-import axios from "axios";
-import { useEffect, useState } from "react";
+// import axios from "axios";
+import { useContext, useState } from "react";
 import Add from "../subcomponents/Add";
 import Product from "./Product";
+import Dropdown from "../subcomponents/Dropdown";
+import { ProductContext } from "../../App";
 
 export default function Orders() {
   const [show, setShow] = useState(false);
-  const [data, setData] = useState([{}]);
-  const navigate = useNavigate();
-  const handleShow = () => setShow(true);
+  // const navigate = useNavigate();
+  // const handleShow = () => setShow(true);
   const [selectedItem, setSelectedItem] = useState();
-  const [deleteShow, setDeleteShow] = useState(false);
+  // const [deleteShow, setDeleteShow] = useState(false);
+  const { datas } = useContext(ProductContext);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      const response = await axios.get("http://localhost:2500/products");
-      setData(response.data);
-    };
-    fetchItems();
-  }, []);
+  // useEffect(() => {
+  //   const fetchItems = async () => {
+  //     const response = await axios.get("http://localhost:2500/products");
+  //     setData(response.data);
+  //   };
+  //   fetchItems();
+  // }, []);
 
   return (
     <div className="products">
@@ -35,6 +37,9 @@ export default function Orders() {
           + Add data
         </button>
       </div>
+      <div>
+        <Dropdown />
+      </div>
       <table>
         <thead>
           <tr>
@@ -48,7 +53,7 @@ export default function Orders() {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, i) => {
+          {datas.map((item, i) => {
             return (
               <Product
                 key={i}

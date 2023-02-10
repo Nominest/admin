@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 export default function Users() {
   const [data, setData] = useState([{}]);
   const navigate = useNavigate();
-  useEffect(() => {
-    const fetchItems = async () => {
-      const response = await axios.get("http://localhost:2500/moderators");
-      setData(response.data);
-    };
-    fetchItems();
-  }, []);
+  // useEffect(() => {
+  //   const fetchItems = async () => {
+  //     const response = await axios.get("http://localhost:2500/moderators");
+  //     setData(response.data);
+  //   };
+  //   fetchItems();
+  // }, []);
   function editProduct(id) {
     navigate(`/edit` + (id + 1));
   }

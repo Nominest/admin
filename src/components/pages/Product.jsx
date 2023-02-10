@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Delete from "../subcomponents/Delete";
 
 export default function Product(prop) {
   const { item, setShow, setSelectedItem, selectedItem } = prop;
-  const [data, setData] = useState([{}]);
+  // const [data, setData] = useState([{}]);
   const [deleteShow, setDeleteShow] = useState(false);
 
   const handleShow = () => {
