@@ -8,7 +8,7 @@ export const users = [
 export const MENUS = [
   { name: "Хянах самбар", url: "/monitoring" },
   { name: "Бүтээгдэхүүнүүд", url: "/products" },
-  { name: "Захиалгууд", url: "/reservations" },
+  { name: "Захиалгууд", url: "/orders" },
   { name: "Хэрэглэгчид", url: "/users" },
   { name: "Модератор", url: "/moderators" },
   { name: "Тохиргоо", url: "/settings" },

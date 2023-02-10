@@ -6,10 +6,13 @@ import { useEffect, useState, createContext } from "react";
 import axios from "axios";
 
 export const ProductContext = createContext();
+export const UserContext = createContext();
 
 function App() {
   const [datas, setDatas] = useState([{}]);
+  const [orders, setOrders] = useState([{}]);
 
+  //products
   useEffect(() => {
     const fetchItems = async () => {
       const response = await axios
@@ -20,11 +23,24 @@ function App() {
     fetchItems();
   }, []);
 
+  //orders
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const response = await axios
+        .get("http://localhost:2500/orders")
+        .then((response) => setOrders(response.order))
+        .catch(() => console.log("context"));
+    };
+    fetchOrders();
+  }, []);
+
   return (
     <div className="App">
       <ProductContext.Provider value={{ datas: datas, setDatas: setDatas }}>
-        <Header />
-        <Main />
+        <UserContext.Provider value={{ orders: orders, setOrders: setOrders }}>
+          <Header />
+          <Main />
+        </UserContext.Provider>
       </ProductContext.Provider>
     </div>
   );

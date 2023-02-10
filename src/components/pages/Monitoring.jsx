@@ -1,21 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import "../../style/pages/monitoring.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useContext } from "react";
+import { ProductContext } from "../../App";
+
 export default function Monitoring() {
   const navigate = useNavigate("");
-  const [data, setData] = useState([{}]);
+  const { datas } = useContext(ProductContext);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      const response = await axios.get("http://localhost:2500/products");
-      setData(response.data);
-    };
-    fetchItems();
-  }, []);
   return (
     <div className="monitor">
-      {data.slice(0, 6).map((item, i) => (
+      {datas.slice(0, 6).map((item, i) => (
         <div
           className="monitor-product"
           key={i}

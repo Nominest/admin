@@ -1,23 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import React from "react";
 import "../../style/pages/orders.css";
+import { UserContext } from "../../App";
 
 export default function Orders() {
-  const [data, setData] = useState([{}]);
+  const { orders } = useContext(UserContext);
+  // const [data, setData] = useState([{}]);
   // const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchDatas = async () => {
-      const response = await axios.get("http://localhost:2500/reservations");
-      setData(response.data);
-    };
-    fetchDatas();
-  }, []);
+  // useEffect(() => {
+  //   const fetchDatas = async () => {
+  //     const response = await axios.get("http://localhost:2500/orders");
+  //     setData(response.data);
+  //   };
+  //   fetchDatas();
+  // }, []);
 
   const orderList =
-    data &&
-    data.map((item, i) => {
+    orders &&
+    orders.map((item, i) => {
       return (
         <tr key={i}>
           <td>{item.id}</td>
