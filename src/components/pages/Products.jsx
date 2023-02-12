@@ -1,6 +1,4 @@
-// import { useNavigate } from "react-router-dom";
 import "../../style/pages/products.css";
-// import axios from "axios";
 import { useContext, useState } from "react";
 import Add from "../subcomponents/Add";
 import Product from "./Product";
@@ -9,10 +7,7 @@ import { ProductContext } from "../../App";
 
 export default function Orders() {
   const [show, setShow] = useState(false);
-  // const navigate = useNavigate();
-  // const handleShow = () => setShow(true);
   const [selectedItem, setSelectedItem] = useState();
-  // const [deleteShow, setDeleteShow] = useState(false);
   const { datas } = useContext(ProductContext);
 
   // useEffect(() => {
@@ -61,7 +56,6 @@ export default function Orders() {
                 setShow={setShow}
                 setSelectedItem={setSelectedItem}
                 selectedItem={selectedItem}
-                // setDeleteShow={setDeleteShow}
               />
             );
           })}
