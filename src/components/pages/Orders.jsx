@@ -2,20 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import React from "react";
 import "../../style/pages/orders.css";
-import { UserContext } from "../../App";
+import { OrderContext, UserContext } from "../../App";
 
 export default function Orders() {
-  const { orders } = useContext(UserContext);
-  // const [data, setData] = useState([{}]);
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   const fetchDatas = async () => {
-  //     const response = await axios.get("http://localhost:2500/orders");
-  //     setData(response.data);
-  //   };
-  //   fetchDatas();
-  // }, []);
+  const { orders } = useContext(OrderContext);
 
   const orderList =
     orders &&
@@ -50,7 +40,7 @@ export default function Orders() {
             <th>Status</th>
           </tr>
         </thead>
-        {/* <tbody>{orderList}</tbody> */}
+        <tbody>{orderList}</tbody>
       </table>
     </div>
   );

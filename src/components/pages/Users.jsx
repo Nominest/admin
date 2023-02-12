@@ -1,22 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import "../../style/pages/products.css";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { OrderContext } from "../../App";
 
 export default function Users() {
   const [data, setData] = useState([{}]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    const fetchItems = async () => {
-      const response = await axios.get("http://localhost:2500/users");
-      setData(response.data);
-    };
-    fetchItems();
-  }, []);
-  function editProduct(id) {
-    navigate(`/edit` + (id + 1));
-  }
-  const items = data.slice(0, 6).map((item, i) => {
+  // const navigate = useNavigate();
+  const { orders } = useContext(OrderContext);
+
+  // function editProduct(id) {
+  //   navigate(`/edit` + (id + 1));
+  // }
+
+  const items = orders.slice(0, 6).map((item, i) => {
     return (
       <tr key={i}>
         <td>{item.id}</td>
@@ -26,7 +23,7 @@ export default function Users() {
         <td>{item.phone}</td>
         <td>{item.date}</td>
         <td>{item.cnt}</td>
-        <td onClick={() => editProduct(i)}>Edit</td>
+        {/* <td onClick={() => editProduct(i)}>Edit</td> */}
         <td>Delete</td>
       </tr>
     );

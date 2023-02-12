@@ -6,12 +6,13 @@ import { useEffect, useState, createContext } from "react";
 import axios from "axios";
 
 export const ProductContext = createContext();
-export const UserContext = createContext();
+export const OrderContext = createContext();
+export const ModeratorContext = createContext();
 
 function App() {
   const [datas, setDatas] = useState([{}]);
   const [orders, setOrders] = useState([{}]);
-
+  const [moderators, setModerators] = useState([{}]);
   //products
   useEffect(() => {
     const fetchItems = async () => {
@@ -26,21 +27,40 @@ function App() {
   //orders
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await axios
-        .get("http://localhost:2500/orders")
-        .then((response) => setOrders(response.order))
-        .catch(() => console.log("context"));
+      try {
+        const response = await axios.get("http://localhost:2500/orders");
+        setOrders(response.data);
+      } catch (error) {
+        console.log("Error fetching orders:", error);
+      }
     };
     fetchOrders();
+  }, []);
+
+  //moderators
+  useEffect(() => {
+    const fetchModerators = async () => {
+      try {
+        const response = await axios.get("http://localhost:2500/moderators");
+        setModerators(response.data);
+      } catch (error) {
+        console.log("Error fetching orders:", error);
+      }
+    };
+    fetchModerators();
   }, []);
 
   return (
     <div className="App">
       <ProductContext.Provider value={{ datas: datas, setDatas: setDatas }}>
-        <UserContext.Provider value={{ orders: orders, setOrders: setOrders }}>
-          <Header />
-          <Main />
-        </UserContext.Provider>
+        <OrderContext.Provider value={{ orders: orders, setOrders: setOrders }}>
+          <ModeratorContext.Provider
+            value={{ moderators: moderators, setModerators: setModerators }}
+          >
+            <Header />
+            <Main />
+          </ModeratorContext.Provider>
+        </OrderContext.Provider>
       </ProductContext.Provider>
     </div>
   );
