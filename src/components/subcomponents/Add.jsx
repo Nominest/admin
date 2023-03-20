@@ -48,7 +48,7 @@ export default function Add(prop) {
             <Form.Group className="mb-3">
               <Form.Label>Image</Form.Label>
               <Form.Control
-                type="text"
+                type="file"
                 placeholder="Insert Image URL"
                 name="image"
               />
