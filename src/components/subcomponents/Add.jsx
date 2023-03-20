@@ -1,24 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import "../../style/sub/add.css";
 import axios from "axios";
 import { v4 as uuid } from "uuid";
+import { ProductContext } from "../../App";
 
 export default function Add(prop) {
-  const [data, setData] = useState([{}]);
+  const { datas, setDatas } = useContext(ProductContext);
+  const [ cat, setCat ] = useState(datas);
   const { setShow, selectedItem } = prop;
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleShow = () => {setShow(true)};
+  const handleClose = () => {
+    setShow(false)
+  };
   const unique_id = uuid();
   const small_id = unique_id.slice(0, 8);
 
+  const fetchItems = async () => {
+    const response = await axios.get("http://localhost:2500/products");
+    setDatas(response.data)
+    
+  };
+  const getUniqueListBy = (arr, key) => {
+    setCat([...new Map(arr.map(item => [item[key], item])).values()])
+  }
   useEffect(() => {
-    const fetchItems = async () => {
-      const response = await axios.get("http://localhost:2500/products");
-      setData(response.data);
-    };
+    getUniqueListBy(datas,'category')
     fetchItems();
   }, []);
 
@@ -33,7 +42,7 @@ export default function Add(prop) {
     console.log(newProduct);
     axios
       .post("http://localhost:2500/product/add", newProduct)
-      .then((res) => setData(res.data))
+      .then((res) => fetchItems(),handleClose())
       .catch((err) => console.log(err));
   };
 
@@ -97,11 +106,11 @@ export default function Add(prop) {
               <Form.Label>Category</Form.Label>
               <Form.Control type="text" defaultValue={selectedItem.category} />
               <Form.Select>
-                {/* {data.map((type, i) => (
+                {cat.map((type, i) => (
                   <option key={i} value={type.value}>
                     {type.category}
                   </option>
-                ))} */}
+                ))}
               </Form.Select>
             </Form.Group>
             <Button variant="primary" type="submit">

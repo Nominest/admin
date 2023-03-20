@@ -14,13 +14,13 @@ function App() {
   const [orders, setOrders] = useState([{}]);
   const [moderators, setModerators] = useState([{}]);
   //products
+  const fetchItems = async () => {
+    const response = await axios
+      .get("http://localhost:2500/products")
+      .then((response) => setDatas(response.data))
+      .catch(() => console.log("context"));
+  };
   useEffect(() => {
-    const fetchItems = async () => {
-      const response = await axios
-        .get("http://localhost:2500/products")
-        .then((response) => setDatas(response.data))
-        .catch(() => console.log("context"));
-    };
     fetchItems();
   }, []);
 

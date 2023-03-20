@@ -8,8 +8,8 @@ import { ProductContext } from "../../App";
 export default function Orders() {
   const [show, setShow] = useState(false);
   const [selectedItem, setSelectedItem] = useState();
-  const { datas } = useContext(ProductContext);
-
+  const { datas,setDatas } = useContext(ProductContext);
+  // console.log(datas,"asdasda")
   // useEffect(() => {
   //   const fetchItems = async () => {
   //     const response = await axios.get("http://localhost:2500/products");
@@ -21,7 +21,7 @@ export default function Orders() {
   return (
     <div className="products">
       <div className="add-button">
-        {show && <Add setShow={setShow} selectedItem={selectedItem} />}
+        {show && <Add setShow={setShow} selectedItem={selectedItem} setDatas={setDatas} datas={datas}/>}
         <button
           variant="primary"
           onClick={() => {
