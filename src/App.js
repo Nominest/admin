@@ -15,40 +15,43 @@ function App() {
   const [moderators, setModerators] = useState([{}]);
   //products
   const fetchItems = async () => {
-    const response = await axios
-      .get("http://localhost:4500/products")
-      .then((response) => setDatas(response.data))
-      .catch(() => console.log("context"));
+    try {
+      const response = await axios.get("http://localhost:4500/products");
+      setDatas(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+
   useEffect(() => {
     fetchItems();
   }, []);
 
   //orders
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get("http://localhost:2500/orders");
-        setOrders(response.data);
-      } catch (error) {
-        console.log("Error fetching orders:", error);
-      }
-    };
-    fetchOrders();
-  }, []);
+  // useEffect(() => {
+  //   const fetchOrders = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:2500/orders");
+  //       setOrders(response.data);
+  //     } catch (error) {
+  //       console.log("Error fetching orders:", error);
+  //     }
+  //   };
+  //   fetchOrders();
+  // }, []);
 
   //moderators
-  useEffect(() => {
-    const fetchModerators = async () => {
-      try {
-        const response = await axios.get("http://localhost:2500/moderators");
-        setModerators(response.data);
-      } catch (error) {
-        console.log("Error fetching orders:", error);
-      }
-    };
-    fetchModerators();
-  }, []);
+  // useEffect(() => {
+  //   const fetchModerators = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:2500/moderators");
+  //       setModerators(response.data);
+  //     } catch (error) {
+  //       console.log("Error fetching orders:", error);
+  //     }
+  //   };
+  //   fetchModerators();
+  // }, []);
 
   return (
     <div className="App">

@@ -48,7 +48,7 @@ export default function Add(prop) {
     const productForm = new FormData();
     productForm.append("file", e.target.image.files[0]);
     productForm.append("details", JSON.stringify(newProduct));
-    fetch("http://localhost:4500/product/add", {
+    fetch("http://localhost:4500/addproduct", {
       method: "POST",
       mode: "cors",
       body: productForm,
