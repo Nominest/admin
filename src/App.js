@@ -16,7 +16,7 @@ function App() {
   //products
   const fetchItems = async () => {
     const response = await axios
-      .get("http://localhost:2500/products")
+      .get("http://localhost:4500/products")
       .then((response) => setDatas(response.data))
       .catch(() => console.log("context"));
   };

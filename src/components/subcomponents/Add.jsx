@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -9,25 +9,26 @@ import { ProductContext } from "../../App";
 
 export default function Add(prop) {
   const { datas, setDatas } = useContext(ProductContext);
-  const [ cat, setCat ] = useState(datas);
+  const [cat, setCat] = useState(datas);
   const { setShow, selectedItem } = prop;
-  const handleShow = () => {setShow(true)};
+  const handleShow = () => {
+    setShow(true);
+  };
   const handleClose = () => {
-    setShow(false)
+    setShow(false);
   };
   const unique_id = uuid();
   const small_id = unique_id.slice(0, 8);
 
   const fetchItems = async () => {
-    const response = await axios.get("http://localhost:2500/products");
-    setDatas(response.data)
-    
+    const response = await axios.get("http://localhost:4500/products");
+    setDatas(response.data);
   };
   const getUniqueListBy = (arr, key) => {
-    setCat([...new Map(arr.map(item => [item[key], item])).values()])
-  }
+    setCat([...new Map(arr.map((item) => [item[key], item])).values()]);
+  };
   useEffect(() => {
-    getUniqueListBy(datas,'category')
+    getUniqueListBy(datas, "category");
     fetchItems();
   }, []);
 
@@ -40,10 +41,18 @@ export default function Add(prop) {
       description: e.target.description.value,
     };
     console.log(newProduct);
-    axios
-      .post("http://localhost:2500/product/add", newProduct)
-      .then((res) => fetchItems(),handleClose())
-      .catch((err) => console.log(err));
+    // axios
+    //   .post("http://localhost:4500/product/add", newProduct)
+    //   .then((res) => fetchItems(), handleClose())
+    //   .catch((err) => console.log(err));
+    const productForm = new FormData();
+    productForm.append("file", e.target.image.files[0]);
+    productForm.append("details", JSON.stringify(newProduct));
+    fetch("http://localhost:4500/product/add", {
+      method: "POST",
+      mode: "cors",
+      body: productForm,
+    });
   };
 
   return (

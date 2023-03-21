@@ -12,6 +12,7 @@ export default function Delete(props) {
   function deleteHandler(event) {
     event.preventDefault();
     axios.delete(`http://localhost:2500/products/${selectedItem.id}`);
+    setDeleteShow(false);
   }
 
   function handleCloseDelete() {
@@ -20,7 +21,7 @@ export default function Delete(props) {
 
   return (
     <div className="deleteModal">
-      <Modal show={deleteShow} onHide={handleCloseDelete}>
+      <Modal show={deleteShow}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Product "{selectedItem.name}"</Modal.Title>
         </Modal.Header>
