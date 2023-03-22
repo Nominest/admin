@@ -11,7 +11,7 @@ export default function Delete(props) {
 
   function deleteHandler(event) {
     event.preventDefault();
-    axios.delete(`http://localhost:2500/products/${selectedItem.id}`);
+    axios.delete(`http://localhost:4500/products/${selectedItem.id}`);
     setDeleteShow(false);
   }
 
